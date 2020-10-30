@@ -1,0 +1,36 @@
+{
+  "name": "a11y-modal-slides",
+  "version": "1.0.1",
+  "description": "Modal Windows for Everyone: CascadiaJS 2020 Slides",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "eleventy --serve",
+    "build": "eleventy"
+  },
+  "keywords": [
+    "eleventy",
+    "11ty",
+    "reveal",
+    "slides",
+    "reveal.js",
+    "a11y",
+    "accessibility",
+    "modal",
+    "dialog"
+  ],
+  "author": "James Steinbach",
+  "license": "ISC",
+  "devDependencies": {
+    "@11ty/eleventy": "^0.11.0",
+    "autoprefixer": "^9.8.5",
+    "cssnano": "^4.1.10",
+    "markdown-it": "^10.0.0",
+    "markdown-it-highlightjs": "^3.1.0",
+    "postcss": "^7.0.32",
+    "sass": "^1.26.10"
+  },
+  "dependencies": {
+    "reveal.js": "^3.9.2"
+  }
+}

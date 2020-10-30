@@ -1,0 +1,374 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Modals for Everyone</title>
+    <meta name="description" content="How to build accessible modal dialogs with HTML, JS, and CSS">
+
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/custom.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/monokai.css">
+
+    <link rel="stylesheet" href="https://use.typekit.net/pzu4dhu.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window
+        .location
+        .search
+        .match(/print-pdf/gi)
+          ? 'css/print/pdf.css'
+          : 'css/print/paper.css';
+      document
+        .getElementsByTagName('head')[0]
+        .appendChild(link);
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        
+          <section >
+  <h1>Modal Windows <span style="display:block;text-decoration:underline">for Everyone</span></h1>
+
+</section>
+
+        
+          <section >
+  <h2>Maybe <em>not</em> a Modal</h2>
+<p>(<a href="https://modalzmodalzmodalz.com/">Modalz, Modalz, Modalz</a>)</p>
+
+</section>
+
+        
+          <section >
+  <p>Display content inline whenever possible.</p>
+
+</section>
+
+        
+          <section >
+  <p>Put content on its own route / page.</p>
+
+</section>
+
+        
+          <section >
+  <p>Don’t open a modal from another modal.</p>
+
+</section>
+
+        
+          <section data-background="images/inception.gif">
+  <h1 style="font-size:6.7em" aria-hidden="true">🚫</h1>
+
+</section>
+
+        
+          <section >
+  <h3>Modal Dialog</h3>
+<ul>
+<li>A “pop-up” (takes over the <em>mode</em> of the page)</li>
+<li>Containing interactive content</li>
+</ul>
+
+</section>
+
+        
+          <section >
+  <h2><span class="h1">HTML</span> Accessibility</h2>
+
+</section>
+
+        
+          <section >
+  <pre><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">dialog</span>
+  <span class="hljs-attr">role</span>=<span class="hljs-string">"dialog"</span>
+  <span class="hljs-attr">aria-modal</span>=<span class="hljs-string">"true"</span>
+  <span class="hljs-attr">aria-labelledby</span>=<span class="hljs-string">"modal-title"</span>
+  <span class="hljs-attr">id</span>=<span class="hljs-string">"this-modal-id"</span>
+&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">h2</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"modal-title"</span>&gt;</span>The Modal Title<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- Modal Contents --&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dialog</span>&gt;</span>
+</code></pre>
+
+</section>
+
+        
+          <section >
+  <h3>Semantics: <br/>the element is a modal dialog</h3>
+<ul>
+<li><a href="https://www.scottohara.me/blog/2019/03/05/open-dialog.html"><code>&lt;dialog&gt;</code></a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/dialog_role"><code>role=&quot;dialog&quot;</code></a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-practices/examples/dialog-modal/dialog.html#rps_label"><code>aria-modal=&quot;true&quot;</code></a></li>
+</ul>
+
+</section>
+
+        
+          <section >
+  <h3>Label: <br/>the element has a title</h3>
+<ul>
+<li><code>aria-labelledby=&quot;title-id&quot;</code></li>
+<li><code>aria-label=&quot;Modal Title&quot;</code></li>
+<li>Read aloud by screen readers</li>
+</ul>
+
+</section>
+
+        
+          <section >
+  <h3>Visibility: Buttons</h3>
+<p>Open Button (outside of modal)</p>
+<pre><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">aria-controls</span>=<span class="hljs-string">"modal-id"</span>&gt;</span>
+  Open {Modal Name}
+<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+</code></pre>
+<p><em>(<a href="https://heydonworks.com/article/aria-controls-is-poop/"><code>aria-controls</code></a> is poop)</em></p>
+
+</section>
+
+        
+          <section >
+  <h3>Visibility: Buttons</h3>
+<p>Close Button (inside modal)</p>
+<pre><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">button</span>&gt;</span>Close {Modal Name}<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+</code></pre>
+<ul>
+<li><a href="https://www.scottohara.me/blog/2017/04/14/inclusively-hidden.html#hiding-content-visually">Screen-Reader-Only CSS</a></li>
+<li><a href="https://www.sarasoueidan.com/blog/accessible-icon-buttons/">Accessible SVG Icons in Buttons</a></li>
+</ul>
+
+</section>
+
+        
+          <section >
+  <h3>Visibility: Buttons</h3>
+<p>Scrim (optional), outside of Modal</p>
+<pre><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">aria-hidden</span>=<span class="hljs-string">"true"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"screen-reader-only"</span>&gt;</span>
+    Close {Modal Name}
+  <span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+</code></pre>
+
+</section>
+
+        
+          <section >
+  <h2><span class="h1">JavaScript</span> Interactivity</h2>
+
+</section>
+
+        
+          <section >
+  <h3>Toggle Visibility</h3>
+<table>
+<thead>
+<tr>
+<th>Open</th>
+<th>Closed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td><code>aria-hidden=&quot;true&quot;</code></td>
+</tr>
+<tr>
+<td><code>open</code></td>
+<td><code>inert</code></td>
+</tr>
+</tbody>
+</table>
+<p><em>Future Feature:</em> <a href="https://github.com/WICG/inert"><code>inert</code> polyfill</a></p>
+
+</section>
+
+        
+          <section >
+  <pre><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">"openModal"</span>&gt;</span>
+  Open Modal
+<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">"closeModal"</span>&gt;</span>
+  Close Modal
+<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+</code></pre>
+
+</section>
+
+        
+          <section >
+  <pre><code class="hljs language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">openModal</span> (<span class="hljs-params"></span>) </span>{
+  modal.removeAttribute(<span class="hljs-string">'aria-hidden'</span>)
+  modal.removeAttribute(<span class="hljs-string">'inert'</span>)
+  modal.setAttribute(<span class="hljs-string">'open'</span>, <span class="hljs-literal">true</span>)
+}
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">closeModal</span> (<span class="hljs-params"></span>) </span>{
+  modal.setAttribute(<span class="hljs-string">'aria-hidden'</span>, <span class="hljs-string">'true'</span>)
+  modal.setAttribute(<span class="hljs-string">'inert'</span>, <span class="hljs-literal">true</span>)
+  modal.removeAttribute(<span class="hljs-string">'open'</span>)
+}
+</code></pre>
+
+</section>
+
+        
+          <section >
+  <h3>Close Events</h3>
+<ul>
+<li>Click outside the modal <br/>(or <code>&lt;button&gt;</code> scrim)</li>
+<li>Escape <code>keyup</code> event</li>
+</ul>
+
+</section>
+
+        
+          <section >
+  <h3>Focus</h3>
+<ol>
+<li><em>On open,</em> focus on modal title <em>or</em> modal container.</li>
+<li><em>While open,</em> <a href="https://www.w3.org/TR/2017/NOTE-wai-aria-practices-1.1-20171214/examples/dialog-modal/js/dialog.js">trap focus inside modal</a>.</li>
+<li><em>On close,</em> restore focus to open button.</li>
+</ol>
+
+</section>
+
+        
+          <section >
+  <h2><span class="h1">CSS</span> Visual Styles</h2>
+
+</section>
+
+        
+          <section >
+  <h3>Selectors</h3>
+<p>Connect CSS to <code>aria-hidden</code> attribute:</p>
+<pre><code class="hljs language-css"><span class="hljs-selector-class">.modal</span><span class="hljs-selector-attr">[aria-hidden=<span class="hljs-string">"true"</span>]</span> {
+  <span class="hljs-attribute">visibility</span>: hidden;
+  <span class="hljs-comment">/* Other CSS */</span>
+}
+</code></pre>
+
+</section>
+
+        
+          <section >
+  <h3>Visibility</h3>
+<p><code>visibility: hidden | visible</code><br>
+<em>not</em><br>
+<code>display: none | block</code></p>
+<ul>
+<li>Prevents <a href="https://github.com/scottaohara/accessible_modal_window#screen-reader-quirks">iOS VoiceOver bug</a></li>
+<li>Allows CSS transitions</li>
+</ul>
+
+</section>
+
+        
+          <section >
+  <h3>Performance</h3>
+<p>For <a href="https://developers.google.com/web/fundamentals/design-and-ux/animations/animations-and-performance">smooth animations</a>:</p>
+<ul>
+<li><code>opacity</code></li>
+<li><code>transform</code></li>
+</ul>
+<p>Respect <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion">motion preferences</a>.</p>
+
+</section>
+
+        
+          <section >
+  <h3>Handle Scrolling Well</h3>
+<ul>
+<li><a href="https://css-tricks.com/considerations-styling-modal/#dealing-with-overflow">Scroll inside the modal</a></li>
+<li><a href="https://css-tricks.com/prevent-page-scrolling-when-a-modal-is-open/">Prevent scrolling on <code>body</code></a></li>
+</ul>
+
+</section>
+
+        
+          <section >
+  <h3>CSS-only Modals?</h3>
+<p><span style="font-size:4em">🙅</span></p>
+<p>These are “clever,” but don’t communicate state to screen readers.</p>
+
+</section>
+
+        
+          <section >
+  <h2>Resources</h2>
+<ul>
+<li>Spec: <a href="https://www.w3.org/TR/wai-aria-practices/#dialog_modal">W3 Aria Dialog Modal</a></li>
+<li>Post: “<a href="https://developer.paciellogroup.com/blog/2018/06/the-current-state-of-modal-dialog-accessibility/">Current State of Modal Dialog Accessibility</a>” by Scott O’Hara (2018)</li>
+<li>Course: <a href="https://egghead.io/lessons/aria-accessible-modal-dialogs">Accessible Modal Dialogs</a> with Marcy Sutton</li>
+<li>Book: <a href="https://inclusive-components.design/">Inclusive Components</a> by Heydon Pickering</li>
+</ul>
+
+</section>
+
+        
+          <section >
+  <h2>Thanks, Y’all! <div aria-hidden="true">👍</div></h2>
+
+</section>
+
+        
+          <section >
+  <h2>James Steinbach</h2>
+<h3>Senior UX Developer<br /> at <a rel="noreferrer noopener nofollow" target="_blank" href="https://dockyard.com/blog/authors/james-steinbach">DockYard</a><svg style="margin-left:.5ch;max-height:1em;vertical-align:middle;display:inline-block" viewBox="0 0 1023 1024" class="logo--dockyard" fill="#fff"><path d="M511.413 0c-282.422 0-511.413 228.991-511.413 512 0 282.422 228.991 511.413 511.413 511.413s511.413-228.991 511.413-511.413c0.587-283.009-228.404-512-511.413-512zM808.514 202.569c0 1.761-1.761 4.697-5.284 8.807-9.394 10.569-110.972 123.89-148.55 162.642 16.44 42.275 16.44 115.083 10.569 185.541-8.22 99.229-21.138 139.156-75.156 169.688s-201.982 34.642-275.963 16.44c-73.982-18.202-83.376-92.183-90.422-95.119-28.771-12.33-25.248-58.128-25.248-58.128 20.55-1.174 40.514 24.073 40.514 24.073 8.22-12.917 32.294-25.248 32.294-25.248 11.156 39.339-12.33 52.844-9.982 58.128 5.872 14.679 37.578 49.908 87.486 24.073 49.908-25.248 51.67-94.532 54.606-179.67s25.248-153.248 98.642-169.688c56.367-12.33 96.881 1.761 115.083 10.569 50.495-36.991 165.578-119.193 175.56-126.239 4.697-2.936 8.22-5.284 10.569-6.459h5.284c0 0 0 0 0 0.587v0z"></path><path d="M473.835 577.174c-16.44 22.899-21.138 44.037-31.706 69.284-8.807 19.963-23.486 29.358-34.642 45.798-9.394 14.092 20.55 18.789 28.771 19.376 21.725.587 45.798-10.569 58.716-27.596 17.615-24.073 19.376-46.972 31.706-72.22 6.459-13.505 26.422-39.339 27.596-51.67 2.936-23.486-56.367-16.44-80.44 17.028zM532.55 392.807c-11.743 4.11-18.202 16.44-14.092 28.183 3.523 11.743 16.44 18.202 27.596 14.092 11.743-4.11 18.202-16.44 14.092-28.183-3.523-11.156-16.44-17.615-27.596-14.092z"></path></svg></h3>
+<h2><code>jdsteinbach</code></h2>
+<h3><a rel="noreferrer noopener nofollow" target="_blank" href="https://twitter.com">Twitter</a> | <a rel="noreferrer noopener nofollow" target="_blank" href="https://github.com/jdsteinbach">GitHub</a> | <a href="https://jdsteinbach.com">Blog</a></h3>
+
+</section>
+
+        
+      </div>
+
+      <footer class="colophon">
+        <div class="colophon__logo">
+          <svg xmlns="http://www.w3.org/2000/svg" width="50.18" height="56" viewBox="0 0 50.18 56" focusable="false" aria-label="CascadiaJS 2020">
+            <rect width="50.18" height="56" fill="#17C37B" />
+            <path d="M25.09 13.88l4.98 4.98 1.25-1.24-6.23-6.23-6.23 6.23 1.25 1.24 4.98-4.98z"/>
+            <path d="M25.09 18.86l8.72 8.72 1.24-1.24-9.96-9.96-9.96 9.96 1.25 1.24 8.71-8.72z"/>
+            <path d="M25.09 23.85L37.54 36.3l1.25-1.25-13.7-13.69-13.7 13.69 1.25 1.25z"/>
+            <path d="M15.13 36.3l1.25 1.24 8.71-8.71 8.72 8.71 1.24-1.24-9.96-9.96-9.96 9.96z"/>
+            <path d="M48.29 0H0v56h50.18V0zm0 54.1H26V34.67l4.11 4.12 1.25-1.25-6.23-6.22-6.23 6.22 1.25 1.25 4.05-4.09v19.4H1.9V1.9h46.39z"/>
+          </svg>
+        </div>
+
+        <a href="https://jdsteinbach.com/a11y-modal-slides/#/" class="colophon__link">jds.li/a11y-modal</a>
+      </footer>
+    </div>
+
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info about config & dependencies:
+      // - https://github.com/hakimel/reveal.js#configuration
+      // - https://github.com/hakimel/reveal.js#dependencies
+      Reveal.initialize({
+        height: 600,
+        width: 1200,
+        hash: true,
+        dependencies: [
+          {
+            src: 'plugin/notes/notes.js',
+            async: true
+          }
+        ],
+        transition: 'fade'
+      });
+    </script>
+  </body>
+</html>
