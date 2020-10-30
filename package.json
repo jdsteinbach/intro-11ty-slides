@@ -1,7 +1,7 @@
 {
-  "name": "a11y-modal-slides",
+  "name": "intro-11ty-slides",
   "version": "1.0.1",
-  "description": "Modal Windows for Everyone: CascadiaJS 2020 Slides",
+  "description": "Intro to Eleventy Slides",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -13,11 +13,7 @@
     "11ty",
     "reveal",
     "slides",
-    "reveal.js",
-    "a11y",
-    "accessibility",
-    "modal",
-    "dialog"
+    "reveal.js"
   ],
   "author": "James Steinbach",
   "license": "ISC",
