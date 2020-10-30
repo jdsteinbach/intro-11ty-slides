@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>Modals for Everyone</title>
-    <meta name="description" content="How to build accessible modal dialogs with HTML, JS, and CSS">
+    <title>Practical Jamstack: Intro to Eleventy</title>
+    <meta name="description" content="How to build sites with Eleventy, from basics to enterprise goals">
 
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/reveal.css">
@@ -13,8 +13,6 @@
 
     <!-- Theme used for syntax highlighting of code -->
     <link rel="stylesheet" href="lib/css/monokai.css">
-
-    <link rel="stylesheet" href="https://use.typekit.net/pzu4dhu.css">
 
     <!-- Printing and PDF exports -->
     <script>
@@ -37,283 +35,274 @@
       <div class="slides">
         
           <section >
-  <h1>Modal Windows <span style="display:block;text-decoration:underline">for Everyone</span></h1>
+  <h1>Intro to <span style="display:block">Eleventy</span></h1>
 
 </section>
 
         
           <section >
-  <h2>Maybe <em>not</em> a Modal</h2>
-<p>(<a href="https://modalzmodalzmodalz.com/">Modalz, Modalz, Modalz</a>)</p>
+  <h2>Installation</h2>
 
 </section>
 
         
           <section >
-  <p>Display content inline whenever possible.</p>
-
-</section>
-
-        
-          <section >
-  <p>Put content on its own route / page.</p>
-
-</section>
-
-        
-          <section >
-  <p>Don’t open a modal from another modal.</p>
-
-</section>
-
-        
-          <section data-background="images/inception.gif">
-  <h1 style="font-size:6.7em" aria-hidden="true">🚫</h1>
-
-</section>
-
-        
-          <section >
-  <h3>Modal Dialog</h3>
-<ul>
-<li>A “pop-up” (takes over the <em>mode</em> of the page)</li>
-<li>Containing interactive content</li>
-</ul>
-
-</section>
-
-        
-          <section >
-  <h2><span class="h1">HTML</span> Accessibility</h2>
-
-</section>
-
-        
-          <section >
-  <pre><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">dialog</span>
-  <span class="hljs-attr">role</span>=<span class="hljs-string">"dialog"</span>
-  <span class="hljs-attr">aria-modal</span>=<span class="hljs-string">"true"</span>
-  <span class="hljs-attr">aria-labelledby</span>=<span class="hljs-string">"modal-title"</span>
-  <span class="hljs-attr">id</span>=<span class="hljs-string">"this-modal-id"</span>
-&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">h2</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"modal-title"</span>&gt;</span>The Modal Title<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
-  <span class="hljs-comment">&lt;!-- Modal Contents --&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">dialog</span>&gt;</span>
+  <h3>Lazy and/or Fast</h3>
+<pre><code class="hljs language-sh">npx @11ty/eleventy
 </code></pre>
 
 </section>
 
         
           <section >
-  <h3>Semantics: <br/>the element is a modal dialog</h3>
-<ul>
-<li><a href="https://www.scottohara.me/blog/2019/03/05/open-dialog.html"><code>&lt;dialog&gt;</code></a></li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/dialog_role"><code>role=&quot;dialog&quot;</code></a></li>
-<li><a href="https://www.w3.org/TR/wai-aria-practices/examples/dialog-modal/dialog.html#rps_label"><code>aria-modal=&quot;true&quot;</code></a></li>
-</ul>
-
-</section>
-
-        
-          <section >
-  <h3>Label: <br/>the element has a title</h3>
-<ul>
-<li><code>aria-labelledby=&quot;title-id&quot;</code></li>
-<li><code>aria-label=&quot;Modal Title&quot;</code></li>
-<li>Read aloud by screen readers</li>
-</ul>
-
-</section>
-
-        
-          <section >
-  <h3>Visibility: Buttons</h3>
-<p>Open Button (outside of modal)</p>
-<pre><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">aria-controls</span>=<span class="hljs-string">"modal-id"</span>&gt;</span>
-  Open {Modal Name}
-<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+  <h3>Safer</h3>
+<pre><code class="hljs language-sh">npm i --save @11ty/eleventy
 </code></pre>
-<p><em>(<a href="https://heydonworks.com/article/aria-controls-is-poop/"><code>aria-controls</code></a> is poop)</em></p>
-
-</section>
-
-        
-          <section >
-  <h3>Visibility: Buttons</h3>
-<p>Close Button (inside modal)</p>
-<pre><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">button</span>&gt;</span>Close {Modal Name}<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
-</code></pre>
-<ul>
-<li><a href="https://www.scottohara.me/blog/2017/04/14/inclusively-hidden.html#hiding-content-visually">Screen-Reader-Only CSS</a></li>
-<li><a href="https://www.sarasoueidan.com/blog/accessible-icon-buttons/">Accessible SVG Icons in Buttons</a></li>
-</ul>
-
-</section>
-
-        
-          <section >
-  <h3>Visibility: Buttons</h3>
-<p>Scrim (optional), outside of Modal</p>
-<pre><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">aria-hidden</span>=<span class="hljs-string">"true"</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"screen-reader-only"</span>&gt;</span>
-    Close {Modal Name}
-  <span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+<pre><code class="hljs language-js">{
+  <span class="hljs-string">&quot;scripts&quot;</span>: {
+    <span class="hljs-string">&quot;build&quot;</span>: <span class="hljs-string">&quot;@11ty/eleventy&quot;</span>,
+    <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-string">&quot;@11ty/eleventy --serve&quot;</span>
+  }
+}
 </code></pre>
 
 </section>
 
         
           <section >
-  <h2><span class="h1">JavaScript</span> Interactivity</h2>
+  <h3>Install Globally?</h3>
+<pre><code class="hljs language-sh">npm i -g @11ty/eleventy
+</code></pre>
+<p>Depends on your opinions about global modules, and how you manage node versions.</p>
+<p>¯\_(ツ)_/¯</p>
 
 </section>
 
         
           <section >
-  <h3>Toggle Visibility</h3>
+  <h3>Eleventy Config</h3>
+<ul>
+<li><code>.eleventy.js</code></li>
+<li>Optional, <em>if</em> you don’t need to change <a href="https://www.11ty.dev/docs/config/#configuration-options">defaults</a></li>
+</ul>
+<pre><code class="hljs language-js"><span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-params">eleventyConfig</span> =&gt;</span> {
+  <span class="hljs-keyword">return</span> {
+    <span class="hljs-attr">templateFormats</span>: [],
+    <span class="hljs-attr">dir</span>: {}
+  };
+};
+</code></pre>
+
+</section>
+
+        
+          <section >
+  <h2>Setting Up Content</h2>
+
+</section>
+
+        
+          <section >
+  <h3>Markdown Files</h3>
+<pre><code class="hljs language-md">---
+title: My Page Title
+author: My Name
+permalink: /this-page-url/
+layout: post
+date: 10-19-2020
+tags:
+<span class="hljs-section">  - news
+---</span>
+Markdown content here.
+</code></pre>
+
+</section>
+
+        
+          <section >
+  <h3>Content from an API</h3>
+<pre><code class="hljs language-js"><span class="hljs-comment">// _data/posts.js</span>
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-comment">// Make a request</span>
+    <span class="hljs-comment">// `resolve` the returned data</span>
+  });
+};
+</code></pre>
+
+</section>
+
+        
+          <section >
+  <h3>Content from an API</h3>
+<pre><code class="hljs"><span class="hljs-template-tag">{% <span class="hljs-name"><span class="hljs-name">for</span></span> p <span class="hljs-keyword">in</span> posts %}</span><span class="xml">
+  </span><span class="hljs-template-variable">{{ p.content }}</span><span class="xml">
+</span><span class="hljs-template-tag">{% <span class="hljs-name"><span class="hljs-name">endfor</span></span> %}</span><span class="xml">
+</span></code></pre>
+
+</section>
+
+        
+          <section >
+  <h3>Content from an API</h3>
+<pre><code class="hljs"><span class="hljs-string">&lt;!--</span> <span class="hljs-string">posts.md</span> <span class="hljs-string">--&gt;</span>
+<span class="hljs-meta">---</span>
+<span class="hljs-attr">permalink:</span> <span class="hljs-string">p.permalink</span>
+<span class="hljs-attr">pagination:</span>
+  <span class="hljs-attr">data:</span> <span class="hljs-string">posts</span>
+  <span class="hljs-attr">size:</span> <span class="hljs-number">1</span>
+  <span class="hljs-attr">alias:</span> <span class="hljs-string">p</span>
+<span class="hljs-meta">---</span>
+</code></pre>
+
+</section>
+
+        
+          <section >
+  <h2>Templating</h2>
+
+</section>
+
+        
+          <section >
+  <h3>Layouts</h3>
+<pre><code class="hljs"><span class="hljs-meta">---</span>
+<span class="hljs-attr">layout:</span> <span class="hljs-string">home</span>
+<span class="hljs-meta">---</span>
+</code></pre>
+<p>This page will be rendered with <code>_includes/home.liquid</code>.</p>
+<ul>
+<li>Or other template extension, e.g. <code>home.njk</code></li>
+</ul>
+
+</section>
+
+        
+          <section >
+  <h3>Layouts Directory</h3>
+<p>Default: <code>dir.includes</code> (default: <code>_includes</code>)</p>
+<p>Override in <code>.eleventy.js</code></p>
+<pre><code class="hljs language-js">dir: {
+  <span class="hljs-attr">layouts</span>: <span class="hljs-string">&#x27;templates&#x27;</span>
+}
+</code></pre>
+
+</section>
+
+        
+          <section >
+  <h3>Nesting Templates</h3>
+<pre><code class="hljs"><span class="hljs-string">index.md</span> <span class="hljs-string">--&gt;</span>
+<span class="hljs-meta">---</span>
+<span class="hljs-attr">layout:</span> <span class="hljs-string">home</span>
+<span class="hljs-meta">---</span>
+</code></pre>
+<pre><code class="hljs"><span class="hljs-string">home.liquid</span> <span class="hljs-string">--&gt;</span>
+<span class="hljs-meta">---</span>
+<span class="hljs-attr">layout:</span> <span class="hljs-string">global</span>
+<span class="hljs-meta">---</span>
+</code></pre>
+
+</section>
+
+        
+          <section >
+  <h3>Layout Aliases</h3>
+<p>Custom layout names mapped to files/folders</p>
+<pre><code class="hljs language-js"><span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-params">eleventyConfig</span> =&gt;</span> {
+  eleventyConfig.addLayoutAlias(
+    <span class="hljs-string">&#x27;home&#x27;</span>,
+    <span class="hljs-string">&#x27;views/homeTemplate.njk&#x27;</span>
+  );
+};
+</code></pre>
+
+</section>
+
+        
+          <section >
+  <h3>Partials (Components)</h3>
+<pre><code class="hljs language-html">{% include header %}
+</code></pre>
+<p>maps to</p>
+<pre><code class="hljs">_includes/<span class="hljs-selector-tag">header</span><span class="hljs-selector-class">.liquid</span>
+</code></pre>
+
+</section>
+
+        
+          <section >
+  <h2>Eleventy Defaults</h2>
+
+</section>
+
+        
+          <section >
+  <h3>Directories</h3>
 <table>
 <thead>
 <tr>
-<th>Open</th>
-<th>Closed</th>
+<th>11ty <code>dir</code> key</th>
+<th>Folder</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td></td>
-<td><code>aria-hidden=&quot;true&quot;</code></td>
+<td><code>input</code></td>
+<td><code>.</code></td>
 </tr>
 <tr>
-<td><code>open</code></td>
-<td><code>inert</code></td>
+<td><code>output</code></td>
+<td><code>_site</code></td>
+</tr>
+<tr>
+<td><code>includes</code></td>
+<td><code>_includes</code></td>
+</tr>
+<tr>
+<td><code>layouts</code></td>
+<td><code>dir.includes</code></td>
+</tr>
+<tr>
+<td><code>data</code></td>
+<td><code>_data</code></td>
 </tr>
 </tbody>
 </table>
-<p><em>Future Feature:</em> <a href="https://github.com/WICG/inert"><code>inert</code> polyfill</a></p>
 
 </section>
 
         
           <section >
-  <pre><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">"openModal"</span>&gt;</span>
-  Open Modal
-<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
-
-<span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">"closeModal"</span>&gt;</span>
-  Close Modal
-<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
-</code></pre>
-
-</section>
-
-        
-          <section >
-  <pre><code class="hljs language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">openModal</span> (<span class="hljs-params"></span>) </span>{
-  modal.removeAttribute(<span class="hljs-string">'aria-hidden'</span>)
-  modal.removeAttribute(<span class="hljs-string">'inert'</span>)
-  modal.setAttribute(<span class="hljs-string">'open'</span>, <span class="hljs-literal">true</span>)
-}
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">closeModal</span> (<span class="hljs-params"></span>) </span>{
-  modal.setAttribute(<span class="hljs-string">'aria-hidden'</span>, <span class="hljs-string">'true'</span>)
-  modal.setAttribute(<span class="hljs-string">'inert'</span>, <span class="hljs-literal">true</span>)
-  modal.removeAttribute(<span class="hljs-string">'open'</span>)
-}
-</code></pre>
-
-</section>
-
-        
-          <section >
-  <h3>Close Events</h3>
+  <h3>Permalinks</h3>
 <ul>
-<li>Click outside the modal <br/>(or <code>&lt;button&gt;</code> scrim)</li>
-<li>Escape <code>keyup</code> event</li>
+<li>Front matter <code>permalink</code> value.</li>
+<li>Fallback: filename (minus extension) becomes path
+<ul>
+<li><code>contact.md</code> becomes <code>/contact/index.html</code></li>
+</ul>
+</li>
 </ul>
 
 </section>
 
         
           <section >
-  <h3>Focus</h3>
-<ol>
-<li><em>On open,</em> focus on modal title <em>or</em> modal container.</li>
-<li><em>While open,</em> <a href="https://www.w3.org/TR/2017/NOTE-wai-aria-practices-1.1-20171214/examples/dialog-modal/js/dialog.js">trap focus inside modal</a>.</li>
-<li><em>On close,</em> restore focus to open button.</li>
-</ol>
-
-</section>
-
-        
-          <section >
-  <h2><span class="h1">CSS</span> Visual Styles</h2>
-
-</section>
-
-        
-          <section >
-  <h3>Selectors</h3>
-<p>Connect CSS to <code>aria-hidden</code> attribute:</p>
-<pre><code class="hljs language-css"><span class="hljs-selector-class">.modal</span><span class="hljs-selector-attr">[aria-hidden=<span class="hljs-string">"true"</span>]</span> {
-  <span class="hljs-attribute">visibility</span>: hidden;
-  <span class="hljs-comment">/* Other CSS */</span>
-}
-</code></pre>
-
-</section>
-
-        
-          <section >
-  <h3>Visibility</h3>
-<p><code>visibility: hidden | visible</code><br>
-<em>not</em><br>
-<code>display: none | block</code></p>
+  <h3>Templating</h3>
 <ul>
-<li>Prevents <a href="https://github.com/scottaohara/accessible_modal_window#screen-reader-quirks">iOS VoiceOver bug</a></li>
-<li>Allows CSS transitions</li>
-</ul>
-
-</section>
-
-        
-          <section >
-  <h3>Performance</h3>
-<p>For <a href="https://developers.google.com/web/fundamentals/design-and-ux/animations/animations-and-performance">smooth animations</a>:</p>
+<li>Default: Liquid</li>
+<li>Included alternatives:
 <ul>
-<li><code>opacity</code></li>
-<li><code>transform</code></li>
+<li>ejs, hbs, mustache, haml, pug, njk</li>
 </ul>
-<p>Respect <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion">motion preferences</a>.</p>
-
-</section>
-
-        
-          <section >
-  <h3>Handle Scrolling Well</h3>
-<ul>
-<li><a href="https://css-tricks.com/considerations-styling-modal/#dealing-with-overflow">Scroll inside the modal</a></li>
-<li><a href="https://css-tricks.com/prevent-page-scrolling-when-a-modal-is-open/">Prevent scrolling on <code>body</code></a></li>
+</li>
 </ul>
-
-</section>
-
-        
-          <section >
-  <h3>CSS-only Modals?</h3>
-<p><span style="font-size:4em">🙅</span></p>
-<p>These are “clever,” but don’t communicate state to screen readers.</p>
 
 </section>
 
         
           <section >
   <h2>Resources</h2>
-<ul>
-<li>Spec: <a href="https://www.w3.org/TR/wai-aria-practices/#dialog_modal">W3 Aria Dialog Modal</a></li>
-<li>Post: “<a href="https://developer.paciellogroup.com/blog/2018/06/the-current-state-of-modal-dialog-accessibility/">Current State of Modal Dialog Accessibility</a>” by Scott O’Hara (2018)</li>
-<li>Course: <a href="https://egghead.io/lessons/aria-accessible-modal-dialogs">Accessible Modal Dialogs</a> with Marcy Sutton</li>
-<li>Book: <a href="https://inclusive-components.design/">Inclusive Components</a> by Heydon Pickering</li>
-</ul>
 
 </section>
 
@@ -337,17 +326,17 @@
 
       <footer class="colophon">
         <div class="colophon__logo">
-          <svg xmlns="http://www.w3.org/2000/svg" width="50.18" height="56" viewBox="0 0 50.18 56" focusable="false" aria-label="CascadiaJS 2020">
-            <rect width="50.18" height="56" fill="#17C37B" />
-            <path d="M25.09 13.88l4.98 4.98 1.25-1.24-6.23-6.23-6.23 6.23 1.25 1.24 4.98-4.98z"/>
-            <path d="M25.09 18.86l8.72 8.72 1.24-1.24-9.96-9.96-9.96 9.96 1.25 1.24 8.71-8.72z"/>
-            <path d="M25.09 23.85L37.54 36.3l1.25-1.25-13.7-13.69-13.7 13.69 1.25 1.25z"/>
-            <path d="M15.13 36.3l1.25 1.24 8.71-8.71 8.72 8.71 1.24-1.24-9.96-9.96-9.96 9.96z"/>
-            <path d="M48.29 0H0v56h50.18V0zm0 54.1H26V34.67l4.11 4.12 1.25-1.25-6.23-6.22-6.23 6.22 1.25 1.25 4.05-4.09v19.4H1.9V1.9h46.39z"/>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -200 3848 1800" focusable="false" aria-label="Front Range Front-End">
+            <g fill-rule="evenodd">
+              <path fill="#60569C" d="M1735.64 0L507.27 1750.66h174.1L1803.34 154.74h19.35l1121.96 1595.93h174.1L1890.36 0h-154.72z"></path>
+              <path fill="#60569C" d="M1881.3 947.64L2209.45 441H2034.9L1817 788.83h-5.25l-217.88-347.8H1419.3l328.14 506.63h133.87z"></path>
+              <path fill="#5C6443" d="M2753.76 467.26l-947.5 1361.57h179.06l835.6-1201.16h14.9l835.6 1201.16h179.06l-947.5-1361.57h-149.22z"></path>
+              <path fill="#2C313E" d="M600.2 925.04L41.05 1749.4h174.6l448.62-665.22h8.83l448.66 665.2h174.57L737.2 925.05h-137z"></path>
+            </g>
           </svg>
         </div>
 
-        <a href="https://jdsteinbach.com/a11y-modal-slides/#/" class="colophon__link">jds.li/a11y-modal</a>
+        <a href="https://jdsteinbach.com/intro-11ty-slides/#/" class="colophon__link">jds.li/intro-11ty</a>
       </footer>
     </div>
 

@@ -3,6 +3,11 @@
  *
  * By Hakim El Hattab, http://hakim.se
  */
+@font-face {
+  font-family: Recursive;
+  src: url("/fonts/recursive-subset.woff2") format("woff2-variations");
+  font-weight: 300 900;
+}
 body {
   font-feature-settings: "liga";
 }
@@ -11,24 +16,39 @@ section.has-light-background, section.has-light-background h1, section.has-light
   color: #222;
 }
 
-.reveal section h2, .reveal section h2, .reveal section h4, .reveal section h5, .reveal section h6 {
-  font-family: "ibm-plex-mono", Operator Mono, monospace;
+.reveal * {
+  font-variation-settings: "MONO" var(--MONO, 0), "CASL" var(--CASL, 0), "CRSV" var(--CRSV, 0), "wght" var(--wght, 400), "slnt" var(--slnt, 0);
+}
+.reveal section h1 {
+  --wght: 900;
+  --CASL: .25;
+  font-weight: 900;
+}
+.reveal section h2, .reveal section h3, .reveal section h4, .reveal section h5, .reveal section h6 {
+  --wght: 800;
   text-transform: none;
   font-weight: 800;
 }
-.reveal section h2 + p, .reveal section h2 + p, .reveal section h4 + p, .reveal section h5 + p, .reveal section h6 + p {
-  margin-top: 2.56em;
+.reveal section h2 + p,
+.reveal section h2 + pre, .reveal section h3 + p,
+.reveal section h3 + pre, .reveal section h4 + p,
+.reveal section h4 + pre, .reveal section h5 + p,
+.reveal section h5 + pre, .reveal section h6 + p,
+.reveal section h6 + pre {
+  margin-top: 40px;
 }
 .reveal section h2 + h3 {
-  font-family: "canada-type-gibson", Helvetica, sans-serif;
+  --wght: 600;
+  font-family: Recursive, Helvetica, sans-serif;
   text-transform: none;
-  font-weight: 400;
+  font-weight: 600;
+  color: #2c313e;
 }
 .reveal section h2 .h1 {
   margin-bottom: 0.125em;
   padding-bottom: 0.125em;
   display: block;
-  font-family: "mono45-headline", Helvetica, sans-serif;
+  font-family: Recursive, Helvetica, sans-serif;
   font-size: 1.6em;
   border-bottom: 0.15em solid currentColor;
 }
@@ -36,29 +56,44 @@ section.has-light-background, section.has-light-background h1, section.has-light
   font-style: italic;
   border-bottom: 0.125em solid currentColor;
 }
+@supports (font-variation-settings: initial) {
+  .reveal section h1 em, .reveal section h2 em, .reveal section h3 em, .reveal section h4 em, .reveal section h5 em, .reveal section h6 em {
+    --CRSV: 1;
+    --slnt: -12;
+    font-style: normal;
+  }
+}
 .reveal section a, .reveal section a:hover, .reveal section a:active {
   text-decoration: underline !important;
 }
 .reveal section code {
-  font-size: 0.9em;
+  --MONO: 1;
+  padding: 0 0.25ch;
+  background-color: rgba(92, 100, 67, 0.15);
 }
 .reveal section pre {
-  display: inline-block;
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
   width: auto;
+  max-width: 60rem;
   padding: 1ch;
   box-sizing: border-box;
-  background-color: #112378;
-  color: #FFD007;
+  box-shadow: none;
+  background-color: rgba(92, 100, 67, 0.15);
+  color: #5c6443;
 }
 .reveal section pre code {
   max-height: 100%;
   box-sizing: border-box;
   font-size: 40px;
   line-height: 1.2;
+  background: transparent;
   overflow-x: scroll;
   overflow-y: visible;
 }
 .reveal section pre mark {
+  --wght: 800;
   padding: 0 0.25em;
   font-weight: 800;
   color: #fff;
@@ -70,10 +105,14 @@ section.has-light-background, section.has-light-background h1, section.has-light
   margin-left: auto;
   max-width: 40rem;
 }
+.reveal section li {
+  margin-top: 20px;
+}
 .reveal section p {
   margin-right: auto;
   margin-left: auto;
-  max-width: 40rem;
+  width: 40rem;
+  text-align: left;
 }
 .reveal section p:first-child:last-child {
   font-size: 1.6em;
@@ -81,32 +120,53 @@ section.has-light-background, section.has-light-background h1, section.has-light
 .reveal section i, .reveal section em {
   font-style: italic;
 }
+@supports (font-variation-settings: initial) {
+  .reveal section i, .reveal section em {
+    --CRSV: 1;
+    --slnt: -12;
+    font-style: normal;
+  }
+}
 .reveal section b, .reveal section strong {
   font-weight: bold;
 }
+@supports (font-variation-settings: initial) {
+  .reveal section b, .reveal section strong {
+    --wght: 800;
+  }
+}
+.reveal section th {
+  font-weight: bold;
+  font-style: normal;
+}
+@supports (font-variation-settings: initial) {
+  .reveal section th {
+    --wght: 800;
+  }
+}
 .reveal .hljs-keyword, .reveal .hljs-built_in, .reveal .hljs-type, .reveal .hljs-literal, .reveal .hljs-number, .reveal .hljs-regexp, .reveal .hljs-string, .reveal .hljs-subst, .reveal .hljs-symbol, .reveal .hljs-class, .reveal .hljs-function, .reveal .hljs-title, .reveal .hljs-params {
-  color: #17C37B;
+  color: #3d3d5d;
 }
 .reveal .hljs-comment, .reveal .hljs-doctag, .reveal .hljs-meta, .reveal .hljs-meta-keyword, .reveal .hljs-meta-string {
-  color: rgba(255, 208, 7, 0.6);
+  color: #4c5341;
 }
-.reveal .hljs-section, .reveal .hljs-tag, .reveal .hljs-name, .reveal .hljs-builtin-name, .reveal .hljs-attr, .reveal .hljs-attribute, .reveal .hljs-variable {
-  color: rgba(255, 255, 255, 0.8);
+.reveal .hljs-section, .reveal .hljs-tag, .reveal .hljs-builtin-name, .reveal .hljs-attribute, .reveal .hljs-variable {
+  color: rgba(44, 49, 62, 0.6);
 }
 .reveal .hljs-bullet, .reveal .hljs-code, .reveal .hljs-emphasis, .reveal .hljs-strong, .reveal .hljs-formula, .reveal .hljs-link, .reveal .hljs-quote {
-  color: rgba(23, 195, 123, 0.8);
+  color: #46446d;
 }
-.reveal .hljs-selector-tag, .reveal .hljs-selector-id, .reveal .hljs-selector-class, .reveal .hljs-selector-attr, .reveal .hljs-selector-pseudo {
-  color: rgba(255, 208, 7, 0.8);
+.reveal .hljs-selector-tag, .reveal .hljs-name, .reveal .hljs-selector-id, .reveal .hljs-selector-class, .reveal .hljs-selector-attr, .reveal .hljs-selector-pseudo {
+  color: #3c4240;
 }
 .reveal .hljs-template-tag, .reveal .hljs-template-variable {
-  color: white;
+  color: #2c313e;
 }
 .reveal .hljs-addition, .reveal .hljs-deletion {
-  color: rgba(23, 195, 123, 0.6);
+  color: rgba(44, 49, 62, 0.6);
 }
-.reveal .hljs-operator, .reveal .hljs-pattern-match, .reveal .hljs-typing, .reveal .hljs-constructor, .reveal .hljs-module-access, .reveal .hljs-module {
-  color: #FFD007;
+.reveal .hljs-attr, .reveal .hljs-operator, .reveal .hljs-pattern-match, .reveal .hljs-typing, .reveal .hljs-constructor, .reveal .hljs-module-access, .reveal .hljs-module {
+  color: #5c6443;
 }
 .reveal .colophon {
   display: flex;
@@ -114,7 +174,7 @@ section.has-light-background, section.has-light-background h1, section.has-light
   align-items: center;
   position: fixed;
   right: 20px;
-  bottom: 20px;
+  bottom: 0;
   left: 20px;
   z-index: 1;
 }
@@ -127,49 +187,56 @@ section.has-light-background, section.has-light-background h1, section.has-light
   width: 15vw;
 }
 .reveal .colophon__logo svg {
-  height: 8vh;
-  width: auto;
-  fill: #112378;
+  height: auto;
+  width: 100%;
+  display: block;
 }
 .reveal .colophon__link {
-  padding: 0.5em 1em 0.7em;
+  padding: 0.4em 1em 0.6em;
   opacity: 0.75;
-  font-family: "ibm-plex-mono", Operator Mono, monospace;
+  font-family: Recursive, Operator Mono, monospace;
   font-style: italic;
   font-size: 0.6666666667em;
-  background-color: #17C37B;
+  background-color: #ebecf0;
+}
+@supports (font-variation-settings: initial) {
+  .reveal .colophon__link {
+    --slnt: -12;
+    --MONO: 1;
+    font-style: normal;
+  }
 }
 
 /*********************************************
  * GLOBAL STYLES
  *********************************************/
 body {
-  background: #17C37B;
-  background-color: #17C37B;
+  background: #ebecf0;
+  background-color: #ebecf0;
 }
 
 .reveal {
-  font-family: "canada-type-gibson", Helvetica, sans-serif;
+  font-family: Recursive, Helvetica, sans-serif;
   font-size: 40px;
   font-weight: normal;
-  color: #112378;
+  color: #2c313e;
 }
 
 ::-moz-selection {
   color: #fff;
-  background: #2848e1;
+  background: #9ea97e;
   text-shadow: none;
 }
 
 ::selection {
   color: #fff;
-  background: #2848e1;
+  background: #9ea97e;
   text-shadow: none;
 }
 
 ::-moz-selection {
   color: #fff;
-  background: #2848e1;
+  background: #9ea97e;
   text-shadow: none;
 }
 
@@ -189,8 +256,8 @@ body {
 .reveal h5,
 .reveal h6 {
   margin: 0 0 20px 0;
-  color: #112378;
-  font-family: "mono45-headline", Helvetica, sans-serif;
+  color: #60569c;
+  font-family: Recursive, Helvetica, sans-serif;
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: normal;
@@ -311,14 +378,14 @@ body {
   margin: 20px auto;
   text-align: left;
   font-size: 0.55em;
-  font-family: "ibm-plex-mono", Operator Mono, monospace;
+  font-family: Recursive, Operator Mono, monospace;
   line-height: 1.2em;
   word-wrap: break-word;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
 }
 
 .reveal code {
-  font-family: "ibm-plex-mono", Operator Mono, monospace;
+  font-family: Recursive, Operator Mono, monospace;
   text-transform: none;
 }
 
@@ -387,20 +454,20 @@ body {
  * LINKS
  *********************************************/
 .reveal a {
-  color: #112378;
+  color: #5c6443;
   text-decoration: none;
   transition: color 0.15s ease;
 }
 
 .reveal a:hover {
-  color: #0033FF;
+  color: #60569c;
   text-shadow: none;
   border: none;
 }
 
 .reveal .roll span:after {
   color: #fff;
-  background: #080f35;
+  background: #323624;
 }
 
 /*********************************************
@@ -409,7 +476,7 @@ body {
 .reveal section img {
   margin: 15px 0px;
   background: rgba(255, 255, 255, 0.12);
-  border: 4px solid #112378;
+  border: 4px solid #2c313e;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
 }
 
@@ -424,7 +491,7 @@ body {
 
 .reveal a:hover img {
   background: rgba(255, 255, 255, 0.2);
-  border-color: #112378;
+  border-color: #5c6443;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.55);
 }
 
@@ -432,7 +499,7 @@ body {
  * NAVIGATION CONTROLS
  *********************************************/
 .reveal .controls {
-  color: #112378;
+  color: #5c6443;
 }
 
 /*********************************************
@@ -440,7 +507,7 @@ body {
  *********************************************/
 .reveal .progress {
   background: rgba(0, 0, 0, 0.2);
-  color: #112378;
+  color: #5c6443;
 }
 
 .reveal .progress span {
@@ -452,6 +519,6 @@ body {
  *********************************************/
 @media print {
   .backgrounds {
-    background-color: #17C37B;
+    background-color: #ebecf0;
   }
 }

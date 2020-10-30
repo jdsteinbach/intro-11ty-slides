@@ -24,9 +24,7 @@ $selectors: (
   Tags-attributes-configs: (
     section,
     tag,
-    name,
     builtin-name,
-    attr,
     attribute,
     variable
   ),
@@ -41,6 +39,7 @@ $selectors: (
   ),
   CSS: (
     selector-tag,
+    name,
     selector-id,
     selector-class,
     selector-attr,
@@ -55,6 +54,7 @@ $selectors: (
     deletion
   ),
   ReasonML: (
+    attr,
     operator,
     pattern-match,
     typing,
@@ -65,13 +65,13 @@ $selectors: (
 );
 
 $selector-colors: (
-  General-purpose: $backgroundColor,
-  Meta: rgba($preColor, .6),
-  Tags-attributes-configs: rgba(#fff, .8),
-  Markup: rgba($backgroundColor, .8),
-  CSS: rgba($preColor, .8),
-  Templates: white,
-  diff: rgba($backgroundColor, .6),
+  General-purpose: mix($headingColor, $mainColor, 33%),//$mainColor,
+  Meta: mix($preColor, $mainColor, 67%),
+  Tags-attributes-configs: rgba($mainColor, .6),
+  Markup: mix($headingColor, $mainColor),
+  CSS: mix($preColor, $mainColor, 33%),
+  Templates: $mainColor,
+  diff: rgba($mainColor, .6),
   ReasonML: $preColor
 );
 
