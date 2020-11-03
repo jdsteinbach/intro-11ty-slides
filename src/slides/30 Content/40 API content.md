@@ -1,7 +1,8 @@
 ### Content from an API
 
+Turn an array into pages {% link "Data to Pages" "https://www.11ty.dev/docs/pages-from-data/" %}
+
 ```
-<!-- posts.md -->
 ---
 permalink: p.permalink
 pagination:

@@ -2,6 +2,10 @@
 
 ```
 {% raw %}{% for p in posts %}
-  {{ p.content }}
+  <li>
+    <a href="{{ p.url }}">
+      {{ p.title }}
+    </a>
+  </li>
 {% endfor %}{% endraw %}
 ```

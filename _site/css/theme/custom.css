@@ -5,7 +5,7 @@
  */
 @font-face {
   font-family: Recursive;
-  src: url("/fonts/recursive-subset.woff2") format("woff2-variations");
+  src: url("../../fonts/recursive-subset.woff2") format("woff2-variations");
   font-weight: 300 900;
 }
 body {
@@ -143,6 +143,13 @@ section.has-light-background, section.has-light-background h1, section.has-light
   .reveal section th {
     --wght: 800;
   }
+}
+.reveal section .sr-only {
+  position: absolute;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
 }
 .reveal .hljs-keyword, .reveal .hljs-built_in, .reveal .hljs-type, .reveal .hljs-literal, .reveal .hljs-number, .reveal .hljs-regexp, .reveal .hljs-string, .reveal .hljs-subst, .reveal .hljs-symbol, .reveal .hljs-class, .reveal .hljs-function, .reveal .hljs-title, .reveal .hljs-params {
   color: #3d3d5d;

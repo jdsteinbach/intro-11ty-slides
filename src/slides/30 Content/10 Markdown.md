@@ -6,7 +6,7 @@ title: My Page Title
 author: My Name
 permalink: /this-page-url/
 layout: post
-date: 10-19-2020
+date: 2020-10-19
 tags:
   - news
 ---
