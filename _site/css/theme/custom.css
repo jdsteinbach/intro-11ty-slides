@@ -18,14 +18,16 @@ section.has-light-background, section.has-light-background h1, section.has-light
 
 .reveal * {
   font-variation-settings: "MONO" var(--MONO, 0), "CASL" var(--CASL, 0), "CRSV" var(--CRSV, 0), "wght" var(--wght, 400), "slnt" var(--slnt, 0);
+  font-feature-settings: "liga" var(--liga, 1), "kern" var(--kern, 1);
 }
 .reveal section h1 {
   --wght: 900;
-  --CASL: .25;
+  --CASL: .67;
   font-weight: 900;
 }
 .reveal section h2, .reveal section h3, .reveal section h4, .reveal section h5, .reveal section h6 {
   --wght: 800;
+  --CASL: .33;
   text-transform: none;
   font-weight: 800;
 }
@@ -43,6 +45,10 @@ section.has-light-background, section.has-light-background h1, section.has-light
   text-transform: none;
   font-weight: 600;
   color: #2c313e;
+}
+.reveal section h3 {
+  --slnt: -6;
+  --CRSV: 1;
 }
 .reveal section h2 .h1 {
   margin-bottom: 0.125em;
@@ -68,6 +74,8 @@ section.has-light-background, section.has-light-background h1, section.has-light
 }
 .reveal section code {
   --MONO: 1;
+  --CASL: 0;
+  --CRSV: 0;
   padding: 0 0.25ch;
   background-color: rgba(92, 100, 67, 0.15);
 }
@@ -106,9 +114,13 @@ section.has-light-background, section.has-light-background h1, section.has-light
   max-width: 40rem;
 }
 .reveal section li {
+  --CASL: .33;
+  --CRSV: 1;
   margin-top: 20px;
 }
 .reveal section p {
+  --CASL: .33;
+  --CRSV: 1;
   margin-right: auto;
   margin-left: auto;
   width: 40rem;
@@ -150,6 +162,21 @@ section.has-light-background, section.has-light-background h1, section.has-light
   width: 1px;
   overflow: hidden;
   clip: rect(1px, 1px, 1px, 1px);
+}
+.reveal section .link {
+  margin-left: 0.25em;
+  padding: 0.125em;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 0.125em;
+  background-color: rgba(218, 201, 53, 0.25);
+}
+.reveal section .link:hover, .reveal section .link:active {
+  background-color: rgba(96, 86, 156, 0.15);
+}
+.reveal section .link__icon {
+  width: 0.8em;
+  height: 0.8em;
 }
 .reveal .hljs-keyword, .reveal .hljs-built_in, .reveal .hljs-type, .reveal .hljs-literal, .reveal .hljs-number, .reveal .hljs-regexp, .reveal .hljs-string, .reveal .hljs-subst, .reveal .hljs-symbol, .reveal .hljs-class, .reveal .hljs-function, .reveal .hljs-title, .reveal .hljs-params {
   color: #3d3d5d;

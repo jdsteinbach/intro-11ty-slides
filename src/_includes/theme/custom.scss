@@ -33,6 +33,7 @@ $green:     #859900;
 
 // Override theme settings (see ../template/settings.scss)
 $backgroundColor: #ebecf0;
+$backgroundColorAlt: #dac935;
 
 $mainColor: #2c313e;
 $headingColor: #60569c;
@@ -76,18 +77,22 @@ section.has-light-background {
       "CRSV" var(--CRSV, 0),
       "wght" var(--wght, 400),
       "slnt" var(--slnt, 0);
+    font-feature-settings:
+      "liga" var(--liga, 1),
+      "kern" var(--kern, 1);
   }
 
   section {
     h1 {
       --wght: 900;
-      --CASL: .25;
+      --CASL: .67;
 
       font-weight: 900;
     }
 
     h2, h3, h4, h5, h6 {
       --wght: 800;
+      --CASL: .33;
 
       text-transform: none;
       font-weight: 800;
@@ -105,6 +110,11 @@ section.has-light-background {
       text-transform: none;
       font-weight: 600;
       color: $mainColor;
+    }
+
+    h3 {
+      --slnt: -6;
+      --CRSV: 1;
     }
 
     h2 .h1 {
@@ -140,6 +150,8 @@ section.has-light-background {
 
     code {
       --MONO: 1;
+      --CASL: 0;
+      --CRSV: 0;
 
       padding: 0 .25ch;
       background-color: rgba($linkColor, .15);
@@ -185,10 +197,16 @@ section.has-light-background {
     }
 
     li {
+      --CASL: .33;
+      --CRSV: 1;
+
       margin-top: ($mainFontSize / 2);
     }
 
     p {
+      --CASL: .33;
+      --CRSV: 1;
+
       margin-right: auto;
       margin-left: auto;
       width: 40rem;
@@ -233,6 +251,25 @@ section.has-light-background {
 			width: 1px;
 			overflow: hidden;
 			clip: rect( 1px, 1px, 1px, 1px );
+    }
+
+    .link {
+      margin-left: 0.25em;
+      padding: 0.125em;
+      display: inline-flex;
+      align-items: center;
+      border-radius: .125em;
+      background-color: rgba($backgroundColorAlt, .25);
+
+      &:hover,
+      &:active {
+        background-color: rgba($linkColorHover, .15);
+      }
+    }
+
+    .link__icon {
+      width: 0.8em;
+      height: 0.8em;
     }
   }
 

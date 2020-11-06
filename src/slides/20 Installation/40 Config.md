@@ -6,7 +6,7 @@
 ```js
 module.exports = eleventyConfig => {
   return {
-    templateFormats: [],
     dir: {}
   };
 };
+```
