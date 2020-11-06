@@ -37,7 +37,7 @@ section.has-light-background, section.has-light-background h1, section.has-light
 .reveal section h4 + pre, .reveal section h5 + p,
 .reveal section h5 + pre, .reveal section h6 + p,
 .reveal section h6 + pre {
-  margin-top: 40px;
+  margin-top: 36px;
 }
 .reveal section h2 + h3 {
   --wght: 600;
@@ -94,7 +94,7 @@ section.has-light-background, section.has-light-background h1, section.has-light
 .reveal section pre code {
   max-height: 100%;
   box-sizing: border-box;
-  font-size: 40px;
+  font-size: 36px;
   line-height: 1.2;
   background: transparent;
   overflow-x: scroll;
@@ -116,7 +116,7 @@ section.has-light-background, section.has-light-background h1, section.has-light
 .reveal section li {
   --CASL: .33;
   --CRSV: 1;
-  margin-top: 20px;
+  margin-top: 18px;
 }
 .reveal section p {
   --CASL: .33;
@@ -251,7 +251,7 @@ body {
 
 .reveal {
   font-family: Recursive, Helvetica, sans-serif;
-  font-size: 40px;
+  font-size: 36px;
   font-weight: normal;
   color: #2c313e;
 }
